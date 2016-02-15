@@ -1,0 +1,31 @@
+.inliner {
+	display: inline-block;
+}
+
+.portItem {
+	position:relative;
+	height: 55px;
+}
+
+.portName {
+	position:absolute;
+	top:50%;
+	margin-top: -10px;
+}
+
+
+
+
+.jobItem {
+	position:relative;
+	height: 80px
+}
+
+.jobText {
+	position:absolute;
+
+}
+
+.jobButtons {
+	margin-top: 10px;
+}

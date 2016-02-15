@@ -1,0 +1,71 @@
+<ul id="portList" class="list-group"> 
+<% portSettings.ports.forEach(function(port) {%>
+	<li id="<%= port._id %>" class="list-group-item clearfix portItem">
+		<div class="portName">
+			<p><%= ((port.master) ? "Master port: " : "") + port.name %></p>
+		</div>
+		<div class="pull-right btn-group">
+			<button type="button" class="btn btn-primary portEditBtn">Edit  <span class="glyphicon glyphicon-wrench"></span></button>
+			<button type="button" class="btn btn-primary portRemoveBtn">Remove  <span class="glyphicon glyphicon-trash"></span></button>
+		</div>
+	</li>
+<% }) %>
+
+	<li class="list-group-item clearfix portItem">
+		<div class="portName">
+			<p>Add new port</p>
+		</div>
+		<div class="pull-right">
+			<button type="button pull-right" class="btn btn-success portAddBtn">Add <span class="glyphicon glyphicon-plus"></span></button>
+		</div>
+	</li>
+</ul>
+
+
+
+<!-- Modal -->
+<div id="portDetailModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<form id="portDetailModalForm" name="portDetailModalForm" role="form" method="POST" action="/settings/port">
+				<input type="hidden" id="portDetailModalForm_portId" name="portId" value="">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Port detail</h4>
+				</div>
+
+				<div class="modal-body">
+					<!-- Port name-->
+					<div class="form-group">
+						<label class="name" for="portName">Port name:</label><br>
+						<input type="text" name="portName" id="portDetailModalForm_name" class="form-control" placeholder="Port name"><br>
+					</div>
+					<!-- GPIO Port number-->
+					<div class="form-group">
+						<label class="name" for="gpioNum">GPIO port number:</label><br>
+						<select name="gpioNum" id="portDetailModalForm_GPIOPort" class="form-control">
+						</select>
+					</div>
+					<!-- Master port-->
+					<div class="form-group">
+						<label class="name" for="master">Other:</label><br>
+						<div class="checkbox">
+						 	<label><input type="checkbox" name="master" id="portDetailModalForm_master">Master</label>
+						</div>
+					</div>
+				</div>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button id="portDetailModalConfirmBtn" class="btn btn-success"></button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<script src="javascripts/portSettings.js"></script>

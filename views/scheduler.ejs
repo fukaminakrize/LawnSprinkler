@@ -1,0 +1,136 @@
+<% var daysOfWeek = ["Sunday", "Monday", "Thuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] %>
+
+<script src="/javascripts/clockpicker.js"></script>
+
+<ul id="jobList" class="list-group"> 
+<% scheduler.jobs.forEach(function(job) {%>
+	<li jobId="<%= job._id %>" class="list-group-item clearfix jobItem">
+		<div class="jobText">
+			<h4 class="list-group-item-heading"><%= job.name %></h4>
+			<p class="list-group-item-text"><%= job.startTime + " every " + job.daysOfWeek.map(function(day) { return daysOfWeek[day] }).join(", ") %></p>
+			<% var numberOfPhases = job.phases.length %>
+			<% var totalDuration = job.phases.reduce(function(prevDuration, currPhase) { return prevDuration + currPhase.duration; }, 0) %>
+			<p class="list-group-item-text"><%= numberOfPhases + ((numberOfPhases == 1) ? " phase" : " phases") + " for total of " +  totalDuration + ((totalDuration == 1) ? " minute" : " minutes") %></p>
+		</div>
+		<div class="pull-right btn-group jobButtons">
+			<input class="jobEnableSwitch" type="checkbox" data-toggle="toggle" <%= (job.enabled ? "checked" : "")%>>
+			<button type="button" class="btn btn-primary jobEditBtn">Edit  <span class="glyphicon glyphicon-wrench"></span></button>
+			<button type="button" class="btn btn-primary jobRemoveBtn">Remove  <span class="glyphicon glyphicon-trash"></span></button>
+		</div>
+	</li>
+<% }) %>
+
+	<li class="list-group-item clearfix">
+		<div style="position:absolute; padding-top:5px;">
+			<p>Add new job</p>
+		</div>
+		<div class="pull-right">
+			<button type="button pull-right jobButtons" class="btn btn-success jobAddBtn">Add <span class="glyphicon glyphicon-plus"></span></button>
+		</div>
+	</li>
+</ul>
+
+
+
+<!-- Modal for adding or editing jobs -->
+<div id="jobDetailModal" class="modal fade" role="dialog" >
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<form id="jobDetailModalForm" name="jobDetailModalForm" role="form" method="POST" action="/control/job">
+				<input type="hidden" id="jobDetailModalForm_jobId" name="jobId" value="">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Job detail</h4>
+				</div>
+
+				<div class="modal-body" style="overflow-y: auto; height: 500px;">
+					<!-- Job name-->
+					<div class="form-group">
+						<label class="name" for="jobName">Job name:</label><br>
+						<input type="text" name="jobName" id="jobDetailModalForm_name" class="form-control" placeholder="Job name"><br>
+					</div>
+					<!-- Job start time -->
+					<div class="form-group">
+						<label class="name" for="jobStartTime">Job start time:</label><br>
+						<div class="input-group clockpicker" data-autoclose="true">
+							<input type="text" name="jobStartTime" id="jobDetailModalForm_startTime" class="form-control" placeholder="Job start time">
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-time"></span>
+							</span>
+						</div>
+					</div>
+					<!-- Repeat for days -->
+					<div class="form-group ">
+						<label class="name" for="repeat">Repeat every:</label><br>
+						<div class="list-group">
+							<div class="checkbox list-group-item">
+								<label><input type="checkbox" name="jobRepeat_1">Monday</label>
+							</div>
+							<div class="checkbox list-group-item">
+								<label><input type="checkbox" name="jobRepeat_2">Thuesday</label>
+							</div>
+							<div class="checkbox list-group-item">
+								<label><input type="checkbox" name="jobRepeat_3">Wednesday</label>
+							</div>
+							<div class="checkbox list-group-item">
+								<label><input type="checkbox" name="jobRepeat_4">Thursday</label>
+							</div>
+							<div class="checkbox list-group-item">
+								<label><input type="checkbox" name="jobRepeat_5">Friday</label>
+							</div>
+							<div class="checkbox list-group-item">
+								<label><input type="checkbox" name="jobRepeat_6">Saturday</label>
+							</div>
+							<div class="checkbox list-group-item">
+								<label><input type="checkbox" name="jobRepeat_7">Sunday</label>
+							</div>
+						</div>
+					</div>
+					<!-- Job's phases -->
+					<div class="form-group">
+						<label class="name" for="phases">Phases:</label><br>
+						<div class="list-group form-horizontal" id="jobDetailModalForm_phases">
+							<li id="newJobPhaseListItem" class="list-group-item ">
+								<div class="container-fluid">
+									<div class="row">
+										<div class="col-sm-6 col-xs-6">
+											<select id="jobDetailModalForm_newPhasePort" class="form-control">
+											<% manualControl.ports.forEach(function(port) { if (port.master == false) { %>
+												<option value="<%= port._id %>"><%= port.name %></option>
+											<% }}) %>
+											</select>
+										</div>
+										<div class="col-sm-3 col-xs-3">
+											<input type="number" id="jobDetailModalForm_newPhaseDuration" class="form-control" placeholder="minutes">
+										</div>
+										<div class="col-sm-3 col-xs-3">
+											<span class="pull-right">
+												<button type="button" id="jobDetailModalAddPhaseBtn" class="btn btn-sm btn-success">Add <span class="glyphicon glyphicon-plus"></span></button>	 
+											</span>
+										</div>
+									</div>
+								</div>						
+							</li>
+						</div>			
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button id="jobDetailModalConfirmBtn" class="btn btn-success"></button>
+				</div>
+
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script src="javascripts/scheduler.js"></script>
+
+
+

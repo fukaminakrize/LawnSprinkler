@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<%- include('header') %>
+	<body>
+		<%- include('navbar') %>
+		<div class="row-offcanvas row-offcanvas-left">
+			<%- include('sidebar') %>
+			<div id="content">
+				<div class="col-md-12">
+					<p class="visible-xs visible-sm">
+            			<button type="button" class="btn btn-primary btn-xs" onclick="$('.row-offcanvas').toggleClass('active')"><i class="glyphicon glyphicon-chevron-left"></i></button>
+          			</p>
+					<div class="tab-content">
+						<% subsections.forEach(function(subsection) { %>
+							<div id="<%= subsection.view %>" class="tab-pane fade in <%= ((subsections.indexOf(subsection) == 0) ? 'active' : '')%>">
+								<h1 class="content-header"><%= subsection.name %></h1>
+								<%- include(subsection.view) %>
+							</div>
+						<% }); %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+
