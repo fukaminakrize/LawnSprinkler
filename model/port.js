@@ -1,9 +1,10 @@
-var rpi = false;
+// Load configuration file
+var config = require("../config.js");
 
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-if (rpi)
-	var GPIO = require('onoff').Gpio
+if (config.rp_gpio)
+	var GPIO = require('onoff').Gpio;
 
 var portSchema = new Schema({
 	GPIOPortNum: { type: Number, required: true},
@@ -20,9 +21,9 @@ var initializedPorts = {};
 portSchema.methods.setState = function(state) {
 	this.state = state;
 
-	if (rpi) {
+	if (config.rp_gpio) {
 		// Set GPIO port
-		// If not openned, open
+		// If not opened, open it
 		if (!initializedPorts[this.GPIOPortNum]) {
 			console.log("Initializing GPIO port " + this.GPIOPortNum);
 			initializedPorts[this.GPIOPortNum] = new GPIO(this.GPIOPortNum, 'out');

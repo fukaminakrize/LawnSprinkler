@@ -4,7 +4,7 @@ var path = require('path');
 var async = require('async');
 var exec = require('child_process').exec;
 
-var Port = require(path.join(__dirname, '../model/port.js'));
+var Port = require("../model/port.js");
 
 Array.prototype.sub = function(a) {
 	return this.filter(function(i) {return a.indexOf(i) < 0;});
@@ -103,7 +103,7 @@ router.post('/port', function(req, res, next) {
 			console.log(err);
 		}
 		res.redirect('/settings');
-	}
+	};
 
 	if (portId) {
 		console.log("Updating existing port: " + name);

@@ -10,27 +10,23 @@ var expressSession = require('express-session');
 var mongo = require('mongoose');
 var fs = require("fs");
 
-
 // Load configuration file
-var configFileName = "config.json";
-var config = JSON.parse(fs.readFileSync(path.join(__dirname, configFileName)));
-GLOBAL.config = config;
+var config = require("./config.js");
+
+var passport = require("./lib/passport.js");
+
+var status = require("./routes/status");
+var control = require("./routes/control");
+var settings = require("./routes/settings");
+var auth = require("./routes/auth")(passport);
+
+var jobExecutor = require("./lib/jobExecutor.js");
+
+var Port = require("./model/port.js");
+var Job = require( "./model/job.js");
 
 
-var passport = require(path.join(__dirname, '/lib/passport.js'));
-
-var status = require(path.join(__dirname, '/routes/status'));
-var control = require(path.join(__dirname, '/routes/control'));
-var settings = require(path.join(__dirname, '/routes/settings'));
-var auth = require(path.join(__dirname, '/routes/auth'))(passport);
-
-var jobExecutor = require(path.join(__dirname, '/lib/jobExecutor.js'));
-
-var Port = require(path.join(__dirname, "/model/port.js"));
-var Job = require(path.join(__dirname, "/model/job.js"));
-
-
-// Connect to mongo db
+// Connect to mongodb
 mongo.connect("mongodb://localhost/LawnSprinkler", function(err) {
 	if (err) {
 		console.log("Cannot connect to database", err);
@@ -44,7 +40,7 @@ mongo.connect("mongodb://localhost/LawnSprinkler", function(err) {
 var app = express();
 
 // Server setup
-app.set('port', process.env.PORT || config.port || 3000);
+app.set('port', config.port);
 
 
 app.set('env', 'development');

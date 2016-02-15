@@ -8,17 +8,16 @@ var router = express.Router();
 var path = require('path');
 var async = require('async');
 
-var Port = require(path.join(__dirname, '../model/port.js'));
-var Job = require(path.join(__dirname, '../model/job.js'));
+var Port = require("../model/port.js");
+var Job = require("../model/job.js");
 
-var jobExecutor = require(path.join(__dirname, '../lib/jobExecutor.js'));
+var jobExecutor = require("../lib/jobExecutor.js");
 
 var ejsData = { title: 'Lawn Sprinkler',
                 sectionName: 'Control',
                 subsections: [ 
                                {name: 'Scheduler', view:'scheduler'},
-                               {name:'Manual control', view:'manual'},
-                               ]
+                               {name:'Manual control', view:'manual'}]
                 };
 
 /* GET Status page. */
@@ -53,8 +52,9 @@ router.get('/', function(req, res, next) {
  		}],
  		//Final callback
  		function(err) {
- 			if (err)
- 				console.log(err)
+ 			if (err) {
+				console.log(err);
+			}
 
  			res.render('page', ejsData);
  		})
@@ -121,7 +121,7 @@ router.get('/job', function(req, res, next) {
 /* POST job, update or create */
 router.post('/job', function(req, res, next) {
 	var jobId = req.body.jobId;
-	var jobName = req.body.jobName
+	var jobName = req.body.jobName;
 	var jobStartTime = req.body.jobStartTime;
 
 	//days of repetition will be in req body like jobRepeat_1: 'on', so iterate through fields in body, find fields beginning with jobRepeat_ followed by day number, that have "on" value and if its not already in array of days, push it there
@@ -153,7 +153,7 @@ router.post('/job', function(req, res, next) {
 		}
 
 		res.redirect('/control');
-	}
+	};
 
 	//console.log(jobData)
 
@@ -233,9 +233,9 @@ router.post('/jobPhase', function(req, res, next) {
 				var phase = {
 					port: portId,
 					duration: duration
-				}
+				};
 
-				job.phases.push(phase)
+				job.phases.push(phase);
 				job.save();
 				resJSON.phase = phase;
 
