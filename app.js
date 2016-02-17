@@ -22,10 +22,6 @@ var auth = require("./routes/auth")(passport);
 
 var jobExecutor = require("./lib/jobExecutor.js");
 
-var Port = require("./model/port.js");
-var Job = require( "./model/job.js");
-
-
 // Connect to mongodb
 mongo.connect("mongodb://localhost/LawnSprinkler", function(err) {
 	if (err) {
@@ -105,5 +101,5 @@ app.use(function(err, req, res, next) {
 
 // Start server
 http.createServer(app).listen(app.get('port'), function(){
-  console.log('Server started listening at port ' + app.get('port'));
+	console.log('Server started listening at port ' + app.get('port'));
 });

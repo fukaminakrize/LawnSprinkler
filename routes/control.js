@@ -1,6 +1,5 @@
 /*
 	todo: pri odstranovani portu, odstranit aj referenciu nan v jobe (http://mongoosejs.com/docs/middleware.html)
-
 */
 
 var express = require('express');
@@ -248,7 +247,6 @@ router.post('/jobPhase', function(req, res, next) {
 	}
 });
 
-
 /* DELETE job phase */
 router.delete('/jobPhase', function(req, res, next) {
 	var jobId = req.body.jobId;
@@ -281,8 +279,6 @@ router.delete('/jobPhase', function(req, res, next) {
 		});
 	}
 });
-
-
 
 
 module.exports = router;

@@ -13,10 +13,7 @@ var portSchema = new Schema({
 	state: { type: Boolean, default: false}
 });
 
-
-
 var initializedPorts = {};
-
 
 portSchema.methods.setState = function(state) {
 	this.state = state;
@@ -38,6 +35,5 @@ portSchema.methods.setState = function(state) {
 var Port = mongoose.model('Port', portSchema);
 
 Port.GPIOList = [4,17,18,22,23,24,25,27];
-
 
 module.exports = Port;

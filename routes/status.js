@@ -25,7 +25,6 @@ function prepareLogsView() {
 }
 
 
-
 router.get('/blah', function(req, res, next) {
 	res.send('fdsfs');
 });
