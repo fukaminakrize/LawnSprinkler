@@ -57,7 +57,7 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public'), {maxAge: 86400000 })); // 1 day
 
 
-//Authentization wont be required for /auth, but will be for everything else bellow
+//Authentication wont be required for /auth, but will be for everything else bellow
 app.use('/auth', auth);
 app.use(passport.requireAuth);
 
