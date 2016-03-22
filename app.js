@@ -14,6 +14,7 @@ var fs = require("fs");
 var config = require("./config.js");
 
 var passport = require("./lib/passport.js");
+var dataCollector = require("./lib/dataCollector.js");
 
 var status = require("./routes/status");
 var control = require("./routes/control");

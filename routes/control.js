@@ -54,7 +54,6 @@ router.get('/', function(req, res, next) {
  			if (err) {
 				console.log(err);
 			}
-
  			res.render('page', ejsData);
  		})
  });

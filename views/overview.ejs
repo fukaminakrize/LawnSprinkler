@@ -1,1 +1,18 @@
-<p>overvieeeew</p>
+<h3>Running job:</h3>
+
+<h3>Sensors stats (Last update: <span id="sensor_last_update"><%= sensorData.timestamp.toLocaleString() %></span>):</h3>
+<ul class="list-group">
+    <li class="list-group-item">
+        <p>Water level:  <span id="sensor_water_level"><%= sensorData.water_level %>m</span></p>
+    </li>
+
+    <li class="list-group-item">
+        <p>Moisture level: <span id="sensor_moisture_level"><%= sensorData.moisture_level %>%</span></p>
+    </li>
+
+    <li class="list-group-item">
+        <p>Temperature: <span id="sensor_temperature"><%= sensorData.temperature %>°C</span></p>
+    </li>
+</ul>
+
+<script src="javascripts/status.js"></script>

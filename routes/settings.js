@@ -48,6 +48,9 @@ router.get('/', function(req, res, next) {
 		}],
 		//Final callback
 		function(err) {
+			if (err) {
+				console.log(err);
+			}
 			res.render('page', ejsData);
 		})
  });
@@ -81,7 +84,7 @@ router.get('/port', function(req, res, next) {
 
 /* POST Edit or create port */
 router.post('/port', function(req, res, next) {
-	var GPIOPort = req.body.gpioNum
+	var GPIOPort = req.body.gpioNum;
 	var name = req.body.portName;
 	var portId = req.body.portId;
 	var master = (req.body.master && (req.body.master == "on"));
