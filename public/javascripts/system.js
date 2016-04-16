@@ -2,18 +2,23 @@ $(document).ready(function () {
 	$('#systemCommandForm').submit(commandFormSubmit);
 	$("#systemCommandConfirmModal_perform").click(performCommand);
 
-	var systemCommandFormData;
 
 	function commandFormSubmit(event) {
+
 		event.preventDefault();
 
-		systemCommandFormData = $('#systemCommandForm').serialize();
 
-		$("#systemCommandConfirmModal_text").text("Really ?");
-		$("#systemCommandConfirmModal").modal();
+		var actionName = $("#systemCommandForm option:selected").text();
+		console.log(actionName);
+		bootbox.confirm(actionName + "?", function(result) {
+			if (result == false)
+				return;
+
+			performCommand($('#systemCommandForm').serialize());
+		});
 	}
 
-	function performCommand() {
+	function performCommand(systemCommandFormData) {
 		commandForm = $('#systemCommandForm');
 		$.ajax({
 			url: commandForm.attr('action'),

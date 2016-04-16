@@ -1,6 +1,6 @@
 <ul id="portList" class="list-group"> 
 <% portSettings.ports.forEach(function(port) {%>
-	<li id="<%= port._id %>" class="list-group-item clearfix portItem">
+	<li portId="<%= port._id %>" class="list-group-item clearfix portItem">
 		<div class="portName">
 			<p><%= ((port.master) ? "Master port: " : "") + port.name %></p>
 		</div>

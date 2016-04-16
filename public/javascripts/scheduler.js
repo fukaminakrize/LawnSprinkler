@@ -19,14 +19,13 @@ $(document).ready(function () {
 	//remove job from the list
 	$(".jobRemoveBtn").click(function() {
 		var jobItem = $(this).closest(".jobItem");
-		var jobId = $(this).closest("li").attr("jobId");
-		$.ajax({type: "DELETE", url: "/control/job", data: {jobId: jobId}, success: function(result) {
-			if (result.err) {
-				alert(result.err);	
-			} else {
-				jobItem.slideUp(200);
-			}
-		}});
+		var jobName = jobItem.find(".jobName").text();
+		bootbox.confirm("Remove job " + jobName + "?", function(result) {
+			if (result == false)
+				return;
+
+			removeJob(jobItem);
+		});
 	});
 
 	//add job
@@ -135,6 +134,18 @@ $(document).ready(function () {
 		'	</div>' +
 		'</li>';
 	}
+
+	function removeJob(jobItem) {
+		var jobId = jobItem.attr("jobId");
+		$.ajax({type: "DELETE", url: "/control/job", data: {jobId: jobId}, success: function(result) {
+			if (result.err) {
+				alert(result.err);
+			} else {
+				jobItem.slideUp(200);
+			}
+		}});
+	}
+
 
 	//setup the time picker
 	$('.clockpicker').clockpicker({});
