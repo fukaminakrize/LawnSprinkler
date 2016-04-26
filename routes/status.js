@@ -21,14 +21,14 @@ router.get('/', function(req, res, next) {
 
             ejsData.sensorData = dataCollector.getLastUpdate();
             callback();
-        },
+        }],
         //Final callback
         function(err) {
             if (err) {
                 console.log(err);
             }
             res.render('page', ejsData);
-        }]);
+        });
 });
 
 router.get('/sensorUpdate', function(req, res, next) {

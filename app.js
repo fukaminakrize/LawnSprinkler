@@ -60,13 +60,12 @@ app.use(express.static(path.join(__dirname, 'public'), {maxAge: 86400000 })); //
 
 //Authentication wont be required for /auth, but will be for everything else bellow
 app.use('/auth', auth);
-app.use(passport.requireAuth);
+//app.use(passport.requireAuth);
 
 app.use('/', status);
 app.use('/status', status);
 app.use('/control', control);
 app.use('/settings', settings);
-
 
 
 // catch 404 and forward to error handler

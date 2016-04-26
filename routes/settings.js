@@ -52,7 +52,7 @@ router.get('/', function(req, res, next) {
 				console.log(err);
 			}
 			res.render('page', ejsData);
-		})
+		});
  });
 
 /* GET port, by id or all */
