@@ -36,7 +36,7 @@ $(document).ready(function () {
 
 
 	$("#jobDetailModalForm").on("submit", function (e) {
-		
+
 	});
 
 
