@@ -13,7 +13,7 @@ $(document).ready(function () {
         $.ajax({
             url: "/status/sensorUpdate"
         }).done(function (resJson) {
-            if (resJson !== false) {
+            if (resJson != "") {
                 setSensorData(resJson);
             }
         }).always(function () {
