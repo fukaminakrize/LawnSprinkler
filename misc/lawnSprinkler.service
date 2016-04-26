@@ -1,0 +1,14 @@
+[Unit]
+Description=Lawn Sprinkler App
+After=syslog.target network.target mongodb.service
+
+[Service]
+ExecStart=/usr/local/bin/node app.js
+WorkingDirectory=/root/LawnSprinkler
+User=root
+Group=root
+#Restart=on-failure
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target

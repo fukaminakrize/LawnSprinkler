@@ -12,8 +12,8 @@ Array.prototype.sub = function(a) {
 
 var systemCommands = [["System shutdown", "halt"], 
 						["System reboot", "reboot"],
-						["Node restart", "service lawnSprinkler restart"],
-						["Mongo restart", "service mongodb restart"]];
+						["Node restart", "systemctl restart lawnSprinkler"],
+						["Mongo restart", "systemctl restart mongodb"]];
 
 var ejsData = { title: 'Lawn Sprinkler',
 				sectionName: 'Settings',
