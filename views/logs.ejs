@@ -1,1 +1,17 @@
-<p>log log log</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Timestamp</th>
+            <th>Event</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% events.forEach(function(event) {%>
+    <% var t = event.timestamp %>
+        <tr>
+            <th class="col-md-2"><%= t.getDate() + "." + t.getMonth() + "." + t.getFullYear() + " " + t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds()%></th>
+            <th class="col-md-10"><%= event.description %></th>
+        </tr>
+    <% }) %>
+    </tbody>
+</table>

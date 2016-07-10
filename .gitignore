@@ -35,3 +35,6 @@ node_modules
 notes.txt
 .idea
 node_modules
+
+
+deploy.sh

@@ -1,7 +1,8 @@
 var express = require('express');
 var async = require('async');
 
-var dataCollector = require("../lib/dataCollector.js");
+var dataCollector = require("./../lib/dataCollector.js");
+var eventLogger = require("./../lib/eventLogger.js");
 
 var router = express.Router();
 
@@ -13,7 +14,7 @@ var ejsData = { title: 'Lawn Sprinkler',
                  };
 
 /* GET Status page. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
     async.parallel([
         //Setup Overview view data
         function(callback) {
@@ -21,6 +22,17 @@ router.get('/', function(req, res, next) {
 
             ejsData.sensorData = dataCollector.getLastUpdate();
             callback();
+        },
+        // Setup Logs view
+        function(callback) {
+            eventLogger.getEventLogs(function(err, events) {
+                if (err) {
+                    console.log(err);
+                }
+                
+                ejsData.events = events;
+                callback();
+            }, 10);
         }],
         //Final callback
         function(err) {
@@ -31,7 +43,7 @@ router.get('/', function(req, res, next) {
         });
 });
 
-router.get('/sensorUpdate', function(req, res, next) {
+router.get('/sensorUpdate', function(req, res) {
     res.send(dataCollector.getLastUpdate());
 });
 
