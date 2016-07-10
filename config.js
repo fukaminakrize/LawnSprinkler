@@ -4,6 +4,7 @@ var config = {};
 config.port = 8080;
 
 // Login settings
+config.auth = true;
 config.username = "operator";
 config.password = "tajneheslo";
 
@@ -14,7 +15,7 @@ config.rp_gpio = false;
 config.mqtt_broker_host = "mqtt://192.168.2.116";
 
 // Email notifications
-config.mail_notifications_enabled = true;
+config.mail_notifications_enabled = false;
 config.mail_username = "test@test.com";
 config.mail_password = "password";
 config.mail_smtp_server = "smtp.test.com";

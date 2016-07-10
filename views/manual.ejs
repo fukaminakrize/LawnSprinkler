@@ -2,7 +2,7 @@
 <% manualControl.ports.forEach(function(port) {%>
 	<li class="list-group-item clearfix portItem">
 		<div class="portName">
-			<p><%= port.name %></p>
+			<p><%= port.name + ((port.master) ? " *" : "")%></p>
 		</div>
 		<div class="pull-right">
 			<input class="portSwitch" type="checkbox" data-toggle="toggle" id="<%= port._id %>" <%= (port.state ? "checked" : "")%>>

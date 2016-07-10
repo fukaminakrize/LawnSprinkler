@@ -2,7 +2,7 @@
 <% portSettings.ports.forEach(function(port) {%>
 	<li portId="<%= port._id %>" class="list-group-item clearfix portItem">
 		<div class="portName">
-			<p><%= ((port.master) ? "Master port: " : "") + port.name %></p>
+			<p><%= port.name + ((port.master) ? " *" : "") %></p>
 		</div>
 		<div class="pull-right btn-group">
 			<button type="button" class="btn btn-primary portEditBtn">Edit  <span class="glyphicon glyphicon-wrench"></span></button>
