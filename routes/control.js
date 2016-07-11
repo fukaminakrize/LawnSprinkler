@@ -15,12 +15,12 @@ var jobExecutor = require("../lib/jobExecutor.js");
 var ejsData = { title: 'Lawn Sprinkler',
                 sectionName: 'Control',
                 subsections: [ 
-                               {name: 'Scheduler', view:'scheduler'},
-                               {name:'Manual control', view:'manual'}]
+                               {name: 'Scheduler', view: 'scheduler'},
+                               {name: 'Manual control', view: 'manual'}]
                 };
 
 /* GET Status page. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
 
  	async.parallel([
  		//Setup manual control view data
@@ -60,7 +60,7 @@ router.get('/', function(req, res, next) {
 
 // Port control
 /* PUT port state */
-router.put('/portState', function(req, res, next) {
+router.put('/portState', function(req, res) {
 	var portId = req.body.portId;
 	var state = req.body.state || false;
 
@@ -88,7 +88,7 @@ router.put('/portState', function(req, res, next) {
 
 // Scheduler
 /* GET job, by id or all */
-router.get('/job', function(req, res, next) {
+router.get('/job', function(req, res) {
 	var jobId = req.query.jobId;
 
 	var resJSON = {};
@@ -117,7 +117,7 @@ router.get('/job', function(req, res, next) {
 });
 
 /* POST job, update or create */
-router.post('/job', function(req, res, next) {
+router.post('/job', function(req, res) {
 	var jobId = req.body.jobId;
 	var jobName = req.body.jobName;
 	var jobStartTime = req.body.jobStartTime;
@@ -170,7 +170,7 @@ router.post('/job', function(req, res, next) {
 });
 
 /* DELETE job */
-router.delete('/job', function(req, res, next) {
+router.delete('/job', function(req, res) {
 	var jobId = req.body.jobId;
 	if (!jobId) {
 		res.send({err: "Invalid job ID"});
@@ -182,7 +182,7 @@ router.delete('/job', function(req, res, next) {
 });
 
 /* PUT job enable */
-router.put('/jobEnable', function(req, res, next) {
+router.put('/jobEnable', function(req, res) {
 	var jobId = req.body.jobId;
 	var enabled = (req.body.enabled == "true");
 
@@ -212,7 +212,7 @@ router.put('/jobEnable', function(req, res, next) {
 });
 
 /* POST job phase */
-router.post('/jobPhase', function(req, res, next) {
+router.post('/jobPhase', function(req, res) {
 	var jobId = req.body.jobId;
 	var portId = req.body.portId;
 	var duration = req.body.duration || 0;
@@ -247,7 +247,7 @@ router.post('/jobPhase', function(req, res, next) {
 });
 
 /* DELETE job phase */
-router.delete('/jobPhase', function(req, res, next) {
+router.delete('/jobPhase', function(req, res) {
 	var jobId = req.body.jobId;
 	var phaseId = req.body.phaseId;
 

@@ -25,7 +25,7 @@ var ejsData = { title: 'Lawn Sprinkler',
 
 
 /* GET Settings page. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
 	async.parallel([
 		//Setup port settings view data
 		function(callback) {
@@ -56,7 +56,7 @@ router.get('/', function(req, res, next) {
  });
 
 /* GET port, by id or all */
-router.get('/port', function(req, res, next) {
+router.get('/port', function(req, res) {
 	var portId = req.query.portId;
 
 	var resJSON = {};
@@ -83,7 +83,7 @@ router.get('/port', function(req, res, next) {
 });
 
 /* POST Edit or create port */
-router.post('/port', function(req, res, next) {
+router.post('/port', function(req, res) {
 	var GPIOPort = req.body.gpioNum;
 	var name = req.body.portName;
 	var portId = req.body.portId;
@@ -123,7 +123,7 @@ router.post('/port', function(req, res, next) {
 });
 
 /* DELETE Port */
-router.delete('/port', function(req, res, next) {
+router.delete('/port', function(req, res) {
 	var portId = req.body.portId;
 	if (!portId) {
 		res.send({err: "Invalid port ID"});
@@ -135,7 +135,7 @@ router.delete('/port', function(req, res, next) {
 });
 
 /* GET Available GPIO ports numbers */
-router.get('/availableGPIOPorts', function(req, res, next) {
+router.get('/availableGPIOPorts', function(req, res) {
 	//Get all ports
 	Port.find(function(err, ports) {
 		if (err) res.send({err: true});
@@ -143,14 +143,14 @@ router.get('/availableGPIOPorts', function(req, res, next) {
 		var resJSON = {};
 		resJSON.allGPIOPorts = Port.GPIOList;
 		
-		resJSON.availableGPIOPorts = getAvailableGPIOPorts(ports)
+		resJSON.availableGPIOPorts = getAvailableGPIOPorts(ports);
 
 		res.send(resJSON);	
 	});
 });
 
 /* POST System command */
-router.post('/systemCommand', function(req, res, next) {
+router.post('/systemCommand', function(req, res) {
 	console.log(req.body);
 	var action = parseInt(req.body.action);
 	var timeout = parseInt(req.body.timeout);
@@ -163,7 +163,7 @@ router.post('/systemCommand', function(req, res, next) {
 		res.send({err: "Invalid action"});
 	} else {
 		var systemCommand = systemCommands[action];
-		var commandName = systemCommand[0];
+		// var commandName = systemCommand[0];
 		var command = systemCommand[1];
 	
 		// Perform system command
