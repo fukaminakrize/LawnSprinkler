@@ -12,7 +12,7 @@ config.password = "pass";
 config.rp_gpio = false;
 
 // MQTT settings
-config.mqtt_broker_host = "mqtt://192.168.0.101";
+config.mqtt_broker_host = "mqtt://mosquito";
 
 // Email notifications
 config.mail_notifications_enabled = false;
@@ -27,5 +27,7 @@ config.precipitationLimit = 10;
 config.weatherApiKey =  ""
 config.city = ""
 */
+
+config.mongo_connection_string = "mongodb://mongo/LawnSprinkler";
 
 module.exports = config;

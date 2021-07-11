@@ -24,7 +24,7 @@ var auth = require("./routes/auth")(passport);
 var jobExecutor = require("./lib/jobExecutor.js");
 
 // Connect to mongodb
-mongo.connect("mongodb://localhost/LawnSprinkler", function(err) {
+mongo.connect(config.mongo_connection_string, function(err, db) {
 	if (err) {
 		console.log("Cannot connect to database", err);
 		process.exit(1);
