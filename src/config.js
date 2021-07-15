@@ -1,7 +1,8 @@
 var config = {};
 
 // Server settings
-config.port = 8080;
+config.port = 8000;
+config.host = "localhost";
 
 // Login settings
 config.auth = true;

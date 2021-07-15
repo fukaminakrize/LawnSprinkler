@@ -4,7 +4,7 @@ After=syslog.target network.target mongodb.service
 
 [Service]
 ExecStart=/usr/local/bin/node app.js
-WorkingDirectory=/root/LawnSprinkler
+WorkingDirectory=/root/LawnSprinkler/src
 User=root
 Group=root
 #Restart=on-failure

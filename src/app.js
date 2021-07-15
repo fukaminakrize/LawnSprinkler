@@ -38,7 +38,7 @@ var app = express();
 
 // Server setup
 app.set('port', config.port);
-
+app.set('host', config.host);
 
 app.set('env', 'development');
 // View engine setup
@@ -101,6 +101,6 @@ app.use(function(err, req, res, next) {
 });
 
 // Start server
-http.createServer(app).listen(app.get('port'), function(){
+http.createServer(app).listen(app.get('port'), app.get('host'), function(){
 	console.log('Server started listening at port ' + app.get('port'));
 });
